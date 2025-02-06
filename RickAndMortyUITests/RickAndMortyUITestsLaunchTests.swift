@@ -2,7 +2,7 @@
 //  RickAndMortyUITestsLaunchTests.swift
 //  RickAndMortyUITests
 //
-//  Created by Leo Espinal on 2/5/25.
+//  Created by Leo Espinal on 2/6/25.
 //
 
 import XCTest

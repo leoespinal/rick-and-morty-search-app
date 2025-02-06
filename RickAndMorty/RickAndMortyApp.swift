@@ -2,16 +2,16 @@
 //  RickAndMortyApp.swift
 //  RickAndMorty
 //
-//  Created by Leo Espinal on 2/5/25.
+//  Created by Leo Espinal on 2/6/25.
 //
 
 import SwiftUI
 
 @main
-struct RickAndMortyApp: App {
+struct RickAndMortyApp: App {    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharacterSearchView()
         }
     }
 }

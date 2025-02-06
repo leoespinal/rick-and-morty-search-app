@@ -2,33 +2,110 @@
 //  RickAndMortyUITests.swift
 //  RickAndMortyUITests
 //
-//  Created by Leo Espinal on 2/5/25.
+//  Created by Leo Espinal on 2/6/25.
 //
 
 import XCTest
 
 final class RickAndMortyUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+    private let app = XCUIApplication()
+    
+    override func setUp() {
+        super.setUp()
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app.launch()
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
+    func testNavigatingToCharacterDetailView() throws {
         app.launch()
+        // Find the search bar and enter "Rick" as the search term
+        let searchField = app.searchFields.firstMatch
+        XCTAssertTrue(searchField.exists)
+        searchField.tap()
+        searchField.typeText("Rick")
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Tapping on the first cell navigates to the character detail screen for the first character in the search results
+        let firstCharacterSearchResultCell = app.buttons["CharacterGridItem"].firstMatch
+        firstCharacterSearchResultCell.tap()
+        
+        // Verifying all expected elements on the character detail screen
+        let characterImage = app.images.firstMatch
+        XCTAssertTrue(characterImage.exists)
+        let speciesText = app.staticTexts.element(matching: .staticText, identifier: "SpeciesTextElement")
+        XCTAssertTrue(speciesText.exists)
+        let statusText = app.staticTexts.element(matching: .staticText, identifier: "StatusTextElement")
+        XCTAssertTrue(statusText.exists)
+        let originText = app.staticTexts.element(matching: .staticText, identifier: "OriginTextElement")
+        XCTAssertTrue(originText.exists)
+        let typeText = app.staticTexts.element(matching: .staticText, identifier: "TypeTextElement")
+        XCTAssertFalse(typeText.exists)
+        let characterCreatedDateText = app.staticTexts.element(matching: .staticText, identifier: "CharacterCreatedDateTextElement")
+        XCTAssertTrue(characterCreatedDateText.exists)
+    }
+    
+    @MainActor
+    func testDynamicTypeAccessibilityAudit() throws {
+        app.launch()
+        
+        // Perform the dynamic type audit on the search view
+        do {
+            try app.performAccessibilityAudit(for: .dynamicType)
+        } catch {
+            XCTFail("Unable to perform dynamic type audit of the character search screen")
+        }
+
+        let searchField = app.searchFields.firstMatch
+        XCTAssertTrue(searchField.exists)
+        searchField.tap()
+        searchField.typeText("Rick")
+        
+        // Perform the dynamic type audit on the search result grid
+        do {
+            try app.performAccessibilityAudit(for: .dynamicType)
+        } catch {
+            XCTFail("Unable to perform dynamic type audit of the character search results")
+        }
+
+        let firstCharacterSearchResultCell = app.buttons["CharacterGridItem"].firstMatch
+        firstCharacterSearchResultCell.tap()
+        
+        // Perform the dynamic type audit on the character detail screen
+        do {
+            try app.performAccessibilityAudit(for: .dynamicType)
+        } catch {
+            XCTFail("Unable to perform dynamic type audit")
+        }
+        
+        let characterImage = app.images.firstMatch
+        XCTAssertTrue(characterImage.exists)
+
+        let speciesText = app.staticTexts["SpeciesTextElement"].firstMatch
+        while !speciesText.exists {
+            app.swipeDown()
+        }
+        XCTAssertTrue(speciesText.exists)
+        
+        let statusText = app.staticTexts["StatusTextElement"].firstMatch
+        while !statusText.exists {
+            app.swipeDown()
+        }
+        XCTAssertTrue(statusText.exists)
+
+        let originText = app.staticTexts["OriginTextElement"].firstMatch
+        while !originText.exists {
+            app.swipeDown()
+        }
+        XCTAssertTrue(originText.exists)
+
+        let typeText = app.staticTexts["TypeTextElement"].firstMatch
+        XCTAssertFalse(typeText.exists)
+
+        let characterCreatedDateText = app.staticTexts["CharacterCreatedDateTextElement"].firstMatch
+        while !characterCreatedDateText.exists {
+            app.swipeDown()
+        }
+        XCTAssertTrue(characterCreatedDateText.exists)
     }
 
     @MainActor
