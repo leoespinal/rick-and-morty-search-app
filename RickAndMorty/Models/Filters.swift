@@ -23,8 +23,8 @@ enum CharacterSpeciesFilterOption: String, CaseIterable {
 
 // There are more but for the purposes of this challenge I'm just adding a few
 enum CharacterTypeFilterOption: String, CaseIterable {
-    case planet = "Planet"
-    case spaceStation = "Space station"
-    case ricksToxicSide = "Rick's Toxic Side"
+    case cat = "Cat-Person"
+    case chair = "Chair"
+    case plutonian = "Plutonian"
     case none
 }
