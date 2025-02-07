@@ -56,7 +56,7 @@ public class CharacterService: CharacterServicable {
         }
         
         if type != .none {
-            let typeQueryItem = URLQueryItem(name: Constants.speciesQueryParameterKey, value: type.rawValue)
+            let typeQueryItem = URLQueryItem(name: Constants.typeQueryParameterKey, value: type.rawValue)
             urlComponents?.queryItems?.append(typeQueryItem)
         }
         

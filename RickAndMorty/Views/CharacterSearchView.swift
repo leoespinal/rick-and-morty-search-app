@@ -13,7 +13,7 @@ struct CharacterSearchView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                Group {
+                VStack {
                     if viewModel.characters.isEmpty {
                         CharacterSearchEmptyStateView()
                     } else {
@@ -24,10 +24,11 @@ struct CharacterSearchView: View {
                         }
                     }
                 }
-                .navigationTitle(Text("Character Search"))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 FilterGroupView(viewModel: viewModel)
             }
+            .navigationTitle(Text("Character Search"))
         }
         .searchable(text: $viewModel.searchText)
     }

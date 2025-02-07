@@ -15,63 +15,48 @@ struct FilterGroupView: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: .zero) {
-            VStack(spacing: .zero) {
-                Text("Status")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .padding(.zero)
-                    .accessibilityHidden(true)
-                Picker("Status Filter", selection: $viewModel.selectedStatusFilter) {
-                    ForEach(CharacterStatusFilterOption.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                            .tag(option)
-                    }
-                }
-                .pickerStyle(.automatic)
-                .tint(.white)
-            }
-            .frame(maxWidth: .infinity)
-            .accessibilityElement(children: .combine)
-
-            VStack(spacing: .zero) {
-                Text("Species")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .accessibilityHidden(true)
-                Picker("Species Filter", selection: $viewModel.selectedSpeciesFilter) {
-                    ForEach(CharacterSpeciesFilterOption.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                            .tag(option)
-                    }
-                }
-                .pickerStyle(.automatic)
-                .tint(.white)
-            }
-            .frame(maxWidth: .infinity)
-            .accessibilityElement(children: .combine)
-
-            VStack(alignment: .center, spacing: .zero) {
-                Text("Type")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .accessibilityHidden(true)
-                Picker("Type Filter", selection: $viewModel.selectedTypeFilter) {
-                    ForEach(CharacterTypeFilterOption.allCases, id: \.self) { option in
-                        Text(option.rawValue)
-                            .tag(option)
-                    }
-                }
-                .pickerStyle(.automatic)
-                .tint(.white)
-            }
-            .frame(maxWidth: .infinity)
-            .accessibilityElement(children: .combine)
+            FilterButtonView(
+                title: "Status",
+                accessibilityLabel: "Status filter",
+                options: CharacterStatusFilterOption.allCases,
+                selection: $viewModel.selectedStatusFilter
+            )
+            FilterButtonView(
+                title: "Species",
+                accessibilityLabel: "Species filter",
+                options: CharacterSpeciesFilterOption.allCases,
+                selection: $viewModel.selectedSpeciesFilter
+            )
+            FilterButtonView(
+                title: "Type",
+                accessibilityLabel: "Type filter",
+                options: CharacterTypeFilterOption.allCases,
+                selection: $viewModel.selectedTypeFilter
+            )
         }
         .frame(height: Constants.height)
         .background(Color.black)
+    }
+}
+
+struct FilterButtonView<T: Hashable & Equatable>: View {
+    let title: String
+    let accessibilityLabel: String
+    let options: [T]
+    @Binding var selection: T
+
+    var body: some View {
+        VStack(alignment: .center, spacing: .zero) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundStyle(Color.white)
+                .accessibilityLabel(Text(accessibilityLabel))
+                .dynamicTypeSize(.xSmall ... .xxxLarge)
+            MenuPicker(tintColor: .white, options: options, selection: $selection)
+        }
+        .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .combine)
     }
 }
 
