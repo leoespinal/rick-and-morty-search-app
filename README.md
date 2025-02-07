@@ -6,11 +6,10 @@ This app provides users a way to search for information about Rick and Morty cha
 The Rick and Morty search app was built entirely in SwiftUI and uses the MVVM (Model-View-ViewModel) architecture.
 
 ## Accessibility Support
-##### Voice Over
-##### Dynamic Type/Text 
+- Voice Over
+- Dynamic Type/Text 
 
 ## Third Party Libraries
-
 No third party libraries were used in the development of this app
 
 ## Test Automation
@@ -24,3 +23,9 @@ https://rickandmortyapi.com/documentation/#rest
 https://developer.apple.com/documentation/xctest/user-interface-tests
 https://developer.apple.com/documentation/swiftui/lazyvgrid
 https://developer.apple.com/documentation/swiftui/sharelink
+
+## App Screenshots
+![character-search-empty](https://github.com/user-attachments/assets/69e577f4-01e0-43dd-a7d0-e5808a430918)
+![character-search-portrait](https://github.com/user-attachments/assets/ac552170-c98f-427b-89a6-c6e5612b83ce)
+![character-search-landscape](https://github.com/user-attachments/assets/aec5b8d0-3a56-48a5-a571-fe4af3bc5d76)
+![character-detail](https://github.com/user-attachments/assets/39787ed9-6bb3-4493-ad6f-23a9b791171e)
