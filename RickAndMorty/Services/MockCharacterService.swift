@@ -7,7 +7,7 @@
 import Foundation
 
 /// A service to be used by SwiftUI view previews and unit tests
-class MockCharacterService: CharacterServicable {
+class MockCharacterService: CharacterServiceable {
     static let shared = MockCharacterService()
     var result: Result<[Character], Error> = .success([])
     

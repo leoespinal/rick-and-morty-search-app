@@ -6,7 +6,7 @@
 //
 import Foundation
 
-protocol CharacterServicable {
+protocol CharacterServiceable {
     func fetchCharacters(
         by name: String,
         status: CharacterStatusFilterOption,
@@ -15,7 +15,7 @@ protocol CharacterServicable {
     ) async throws -> [Character]
 }
 
-public class CharacterService: CharacterServicable {
+public class CharacterService: CharacterServiceable {
     enum CharacterNetworkError: Error {
         case invalidURL
         case invalidHttpResponse

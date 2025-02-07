@@ -15,11 +15,11 @@ final class CharacterSearchViewModel: ObservableObject {
     @Published var selectedSpeciesFilter: CharacterSpeciesFilterOption = .none
     @Published var selectedTypeFilter: CharacterTypeFilterOption = .none
 
-    private(set) var characterService: CharacterServicable
+    private(set) var characterService: CharacterServiceable
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initializers
-    init(characterService: CharacterServicable = CharacterService.shared) {
+    init(characterService: CharacterServiceable = CharacterService.shared) {
         self.characterService = characterService
         setUpSubscriptions()
     }
