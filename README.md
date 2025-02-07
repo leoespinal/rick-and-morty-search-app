@@ -25,7 +25,7 @@ https://developer.apple.com/documentation/swiftui/lazyvgrid
 https://developer.apple.com/documentation/swiftui/sharelink
 
 ## App Screenshots
-![character-search-empty](https://github.com/user-attachments/assets/69e577f4-01e0-43dd-a7d0-e5808a430918)
-![character-search-portrait](https://github.com/user-attachments/assets/ac552170-c98f-427b-89a6-c6e5612b83ce)
-![character-search-landscape](https://github.com/user-attachments/assets/aec5b8d0-3a56-48a5-a571-fe4af3bc5d76)
+![character-search-empty](https://github.com/user-attachments/assets/57c87d80-c22c-4df6-a308-71ccd2f8f7b5)
+![character-search-portrait](https://github.com/user-attachments/assets/e0b512b5-4033-4274-bd2d-31034b875173)
+![character-search-landscape](https://github.com/user-attachments/assets/757e726f-5596-4b66-8347-5c147a288c23)
 ![character-detail](https://github.com/user-attachments/assets/39787ed9-6bb3-4493-ad6f-23a9b791171e)
