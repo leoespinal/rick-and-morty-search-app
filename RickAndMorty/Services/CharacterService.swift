@@ -7,7 +7,12 @@
 import Foundation
 
 protocol CharacterServicable {
-    func fetchCharacters(by name: String) async throws -> [Character]
+    func fetchCharacters(
+        by name: String,
+        status: CharacterStatusFilterOption,
+        species: CharacterSpeciesFilterOption,
+        type: CharacterTypeFilterOption
+    ) async throws -> [Character]
 }
 
 public class CharacterService: CharacterServicable {
@@ -20,6 +25,9 @@ public class CharacterService: CharacterServicable {
         static let endpoint = "https://rickandmortyapi.com/api/character"
         static let validHTTPStatusCode = 200
         static let nameQueryParameterKey = "name"
+        static let statusQueryParameterKey = "status"
+        static let speciesQueryParameterKey = "species"
+        static let typeQueryParameterKey = "type"
     }
     static let shared = CharacterService()
     
@@ -27,10 +35,31 @@ public class CharacterService: CharacterServicable {
     private init() {}
     
     // MARK: - CharacterServicable
-    func fetchCharacters(by name: String) async throws -> [Character] {
+    func fetchCharacters(
+        by name: String,
+        status: CharacterStatusFilterOption,
+        species: CharacterSpeciesFilterOption,
+        type: CharacterTypeFilterOption
+    ) async throws -> [Character] {
         let nameQueryItem = URLQueryItem(name: Constants.nameQueryParameterKey, value: name)
         var urlComponents = URLComponents(string: Constants.endpoint)
         urlComponents?.queryItems = [nameQueryItem]
+
+        if status != .none {
+            let statusQueryItem = URLQueryItem(name: Constants.statusQueryParameterKey, value: status.rawValue)
+            urlComponents?.queryItems?.append(statusQueryItem)
+        }
+        
+        if species != .none {
+            let speciesQueryItem = URLQueryItem(name: Constants.speciesQueryParameterKey, value: species.rawValue)
+            urlComponents?.queryItems?.append(speciesQueryItem)
+        }
+        
+        if type != .none {
+            let typeQueryItem = URLQueryItem(name: Constants.speciesQueryParameterKey, value: type.rawValue)
+            urlComponents?.queryItems?.append(typeQueryItem)
+        }
+        
         guard let url = urlComponents?.url else {
             throw CharacterNetworkError.invalidURL
         }

@@ -12,18 +12,22 @@ struct CharacterSearchView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.characters.isEmpty {
-                    CharacterSearchEmptyStateView()
-                } else {
-                    if viewModel.isSearching {
-                        ProgressView()
+            ZStack(alignment: .bottom) {
+                Group {
+                    if viewModel.characters.isEmpty {
+                        CharacterSearchEmptyStateView()
                     } else {
-                        CharacterGridView(viewModel: viewModel)
+                        if viewModel.isSearching {
+                            ProgressView()
+                        } else {
+                            CharacterGridView(viewModel: viewModel)
+                        }
                     }
                 }
+                .navigationTitle(Text("Character Search"))
+
+                FilterGroupView(viewModel: viewModel)
             }
-            .navigationTitle(Text("Character Search"))
         }
         .searchable(text: $viewModel.searchText)
     }
@@ -32,3 +36,4 @@ struct CharacterSearchView: View {
 #Preview {
     CharacterSearchView()
 }
+

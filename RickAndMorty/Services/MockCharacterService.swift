@@ -40,7 +40,12 @@ class MockCharacterService: CharacterServicable {
     private init() {}
 
     // MARK: - CharacterServicable
-    func fetchCharacters(by name: String) async throws -> [Character] {
+    func fetchCharacters(
+        by name: String,
+        status: CharacterStatusFilterOption = .none,
+        species: CharacterSpeciesFilterOption = .none,
+        type: CharacterTypeFilterOption = .none
+    ) async throws -> [Character] {
         switch result {
         case .success(_):
             return mockCharacters

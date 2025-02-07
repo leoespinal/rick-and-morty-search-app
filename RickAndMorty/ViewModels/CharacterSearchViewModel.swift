@@ -11,6 +11,10 @@ final class CharacterSearchViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var characters: [Character] = []
     @Published var isSearching = false
+    @Published var selectedStatusFilter: CharacterStatusFilterOption = .none
+    @Published var selectedSpeciesFilter: CharacterSpeciesFilterOption = .none
+    @Published var selectedTypeFilter: CharacterTypeFilterOption = .none
+
     private(set) var characterService: CharacterServicable
     private var cancellables = Set<AnyCancellable>()
     
@@ -24,29 +28,30 @@ final class CharacterSearchViewModel: ObservableObject {
 private extension CharacterSearchViewModel {
     func setUpSubscriptions() {
         $searchText
-            .sink { [weak self] searchText in
+            .combineLatest($selectedStatusFilter, $selectedSpeciesFilter, $selectedTypeFilter)
+            .sink { [weak self] searchText, statusFilter, speciesFilter, typeFilter in
                 guard let self else { return }
-                handleSearch(using: searchText)
+                handleSearch(using: searchText, statusFilter: statusFilter, speciesFilter: speciesFilter, typeFilter: typeFilter)
             }
             .store(in: &cancellables)
     }
 
-    func handleSearch(using searchText: String) {
+    func handleSearch(using searchText: String, statusFilter: CharacterStatusFilterOption, speciesFilter: CharacterSpeciesFilterOption, typeFilter: CharacterTypeFilterOption) {
         isSearching = true
         
         guard !searchText.isEmpty else {
-            isSearching = false
-            /*
-             If the search text is empty then the list of Characters
-             should be too otherwise they will persist until the next search
-            */
-            characters = []
+            resetUI()
             return
         }
 
         Task {
             do {
-                let characters = try await characterService.fetchCharacters(by: searchText)
+                let characters = try await characterService.fetchCharacters(
+                    by: searchText,
+                    status: statusFilter,
+                    species: speciesFilter,
+                    type: typeFilter
+                )
                 await MainActor.run {
                     self.characters = characters
                     self.isSearching = false
@@ -58,5 +63,17 @@ private extension CharacterSearchViewModel {
                 }
             }
         }
+    }
+
+    func resetUI() {
+        isSearching = false
+        selectedStatusFilter = .none
+        selectedSpeciesFilter = .none
+        selectedTypeFilter = .none
+        /*
+         If the search text is empty then the list of Characters
+         should be too otherwise they will persist until the next search
+        */
+        characters = []
     }
 }

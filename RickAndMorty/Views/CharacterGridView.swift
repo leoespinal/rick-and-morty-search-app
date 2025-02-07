@@ -11,6 +11,7 @@ struct CharacterGridView: View {
     private enum Constants {
         static let portraitModeGridItemScaleFactor: CGFloat = 0.5
         static let landscapeModeGridItemScaleFactor: CGFloat = 0.3
+        static let gridEdgeInsets = EdgeInsets(top: 16, leading: 16, bottom: 100, trailing: 16)
     }
     @ObservedObject var viewModel: CharacterSearchViewModel
     
@@ -33,7 +34,7 @@ struct CharacterGridView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-                .padding()
+                .padding(Constants.gridEdgeInsets)
             }
         }
         .scrollDismissesKeyboard(.immediately)
