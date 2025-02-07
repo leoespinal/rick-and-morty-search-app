@@ -41,52 +41,37 @@ struct CharacterDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: Constants.characterInfoStackSpacing) {
-                    VStack(alignment: .leading) {
-                        Text("Species")
-                        Text(viewModel.characterSpecies)
-                            .font(.title3)
-                            .bold()
-                            .accessibilityIdentifier("SpeciesTextElement")
-                    }
-                    .accessibilityElement(children: .combine)
+                    CharacterInfoTextStackView(
+                        title: "Species",
+                        subtitle: viewModel.characterSpecies,
+                        accessibilityIdentifier: "SpeciesTextElement"
+                    )
 
-                    VStack(alignment: .leading) {
-                        Text("Status")
-                        Text(viewModel.characterStatus)
-                            .font(.title3)
-                            .bold()
-                            .accessibilityIdentifier("StatusTextElement")
-                    }
-                    .accessibilityElement(children: .combine)
+                    CharacterInfoTextStackView(
+                        title: "Status",
+                        subtitle: viewModel.characterStatus,
+                        accessibilityIdentifier: "StatusTextElement"
+                    )
 
-                    VStack(alignment: .leading) {
-                        Text("Origin")
-                        Text(viewModel.characterOrigin)
-                            .font(.title3)
-                            .bold()
-                            .accessibilityIdentifier("OriginTextElement")
-                    }
-                    .accessibilityElement(children: .combine)
-                    
+                    CharacterInfoTextStackView(
+                        title: "Origin",
+                        subtitle: viewModel.characterOrigin,
+                        accessibilityIdentifier: "OriginTextElement"
+                    )
+
                     if let type = viewModel.characterType, !type.isEmpty {
-                        VStack(alignment: .leading) {
-                            Text("Type")
-                            Text(type)
-                                .font(.title3)
-                                .bold()
-                                .accessibilityIdentifier("TypeTextElement")
-                        }
-                        .accessibilityElement(children: .combine)
+                        CharacterInfoTextStackView(
+                            title: "Type",
+                            subtitle: type,
+                            accessibilityIdentifier: "TypeTextElement"
+                        )
                     }
-                    
-                    VStack(alignment: .leading) {
-                        Text("Created on")
-                        Text(viewModel.characterCreationDate)
-                            .font(.title3)
-                            .bold()
-                            .accessibilityIdentifier("CharacterCreatedDateTextElement")
-                    }
-                    .accessibilityElement(children: .combine)
+
+                    CharacterInfoTextStackView(
+                        title: "Created on",
+                        subtitle: viewModel.characterCreationDate,
+                        accessibilityIdentifier: "CharacterCreatedDateTextElement"
+                    )
                 }
                 .padding(Constants.padding)
                 
