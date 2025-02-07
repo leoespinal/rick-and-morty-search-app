@@ -18,7 +18,6 @@ final class RickAndMortyUITests: XCTestCase {
 
     @MainActor
     func testNavigatingToCharacterDetailView() throws {
-        app.launch()
         // Find the search bar and enter "Rick" as the search term
         let searchField = app.searchFields.firstMatch
         XCTAssertTrue(searchField.exists)
@@ -46,8 +45,6 @@ final class RickAndMortyUITests: XCTestCase {
     
     @MainActor
     func testDynamicTypeAccessibilityAudit() throws {
-        app.launch()
-        
         // Perform the dynamic type audit on the search view
         
         // TODO: Figure out how to get this audit to pass
