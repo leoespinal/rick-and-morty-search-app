@@ -7,7 +7,7 @@
 import Foundation
 
 final class CharacterDetailViewModel {
-    private let character: Character
+    private let character: RickAndMortyCharacter
     
     var characterName: String {
         character.name
@@ -38,7 +38,7 @@ final class CharacterDetailViewModel {
     }
     
     // MARK: - Initializers
-    init(character: Character) {
+    init(character: RickAndMortyCharacter) {
         self.character = character
     }
 }

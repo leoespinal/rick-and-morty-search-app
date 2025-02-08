@@ -9,7 +9,7 @@ import SwiftUI
 
 final class CharacterSearchViewModel: ObservableObject {
     @Published var searchText = ""
-    @Published var characters: [Character] = []
+    @Published var characters: [RickAndMortyCharacter] = []
     @Published var isSearching = false
     @Published var selectedStatusFilter: CharacterStatusFilterOption = .none
     @Published var selectedSpeciesFilter: CharacterSpeciesFilterOption = .none

@@ -12,7 +12,7 @@ final class CharacterDetailViewModelTests: XCTestCase {
     func testFormattedCharacterCreationDate() {
         let characterCreationDate = ISO8601DateFormatter.formatterWithFractionalSeconds.date(from: "2017-11-04T18:48:46.250Z")!
         let viewModel = CharacterDetailViewModel(
-            character: Character(
+            character: RickAndMortyCharacter(
                 id: 1,
                 name: "Rick Sanchez",
                 status: "Alive",

@@ -91,7 +91,7 @@ struct CharacterDetailView: View {
 #Preview("CharacterDetailView - No type") {
     CharacterDetailView(
         viewModel: CharacterDetailViewModel(
-            character: Character(
+            character: RickAndMortyCharacter(
                 id: 1,
                 name: "Rick",
                 status: "Alive",
@@ -108,7 +108,7 @@ struct CharacterDetailView: View {
 #Preview("CharacterDetailView - type") {
     CharacterDetailView(
         viewModel: CharacterDetailViewModel(
-            character: Character(
+            character: RickAndMortyCharacter(
                 id: 1,
                 name: "Rick",
                 status: "Alive",

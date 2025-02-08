@@ -9,11 +9,11 @@ import Foundation
 /// A service to be used by SwiftUI view previews and unit tests
 class MockCharacterService: CharacterServiceable {
     static let shared = MockCharacterService()
-    var result: Result<[Character], Error> = .success([])
+    var result: Result<[RickAndMortyCharacter], Error> = .success([])
     
-    var mockCharacters: [Character] {
+    var mockCharacters: [RickAndMortyCharacter] {
         [
-            Character(
+            RickAndMortyCharacter(
                 id: 1,
                 name: "Rick Sanchez",
                 status: "Alive",
@@ -23,7 +23,7 @@ class MockCharacterService: CharacterServiceable {
                 image: URL(string: "https://rickandmortyapi.com/api/character/1")!,
                 origin: CharacterOrigin(name: "Earth (C-137)")
             ),
-            Character(
+            RickAndMortyCharacter(
                 id: 2,
                 name: "Morty Smith",
                 status: "Alive",
@@ -45,7 +45,7 @@ class MockCharacterService: CharacterServiceable {
         status: CharacterStatusFilterOption = .none,
         species: CharacterSpeciesFilterOption = .none,
         type: CharacterTypeFilterOption = .none
-    ) async throws -> [Character] {
+    ) async throws -> [RickAndMortyCharacter] {
         switch result {
         case .success(_):
             return mockCharacters

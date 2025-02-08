@@ -13,9 +13,9 @@ struct CharacterGridItem: View {
         static let imageHeight: CGFloat = 200
         static let placeholderForegroundColorOpacity: CGFloat = 0.5
     }
-    let character: Character
+    let character: RickAndMortyCharacter
     
-    init(character: Character) {
+    init(character: RickAndMortyCharacter) {
         self.character = character
     }
     
@@ -51,7 +51,7 @@ struct CharacterGridItem: View {
 
 #Preview {
     CharacterGridItem(
-        character: Character(
+        character: RickAndMortyCharacter(
             id: 1,
             name: "Rick Sanchez",
             status: "Alive",

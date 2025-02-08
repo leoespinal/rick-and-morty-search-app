@@ -1,5 +1,5 @@
 //
-//  Character.swift
+//  RickAndMortyCharacter.swift
 //  RickAndMorty
 //
 //  Created by Leo Espinal on 2/6/25.
@@ -7,14 +7,14 @@
 import Foundation
 
 struct CharacterResponse: Decodable {
-    let results: [Character]
+    let results: [RickAndMortyCharacter]
 }
 
 struct CharacterOrigin: Decodable, Hashable {
     let name: String
 }
 
-struct Character: Decodable, Identifiable, Hashable {
+struct RickAndMortyCharacter: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
     let status: String

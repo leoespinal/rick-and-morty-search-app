@@ -42,7 +42,7 @@ struct CharacterGridView: View {
             }
         }
         .scrollDismissesKeyboard(.immediately)
-        .navigationDestination(for: Character.self) { character in
+        .navigationDestination(for: RickAndMortyCharacter.self) { character in
             CharacterDetailView(
                 viewModel: CharacterDetailViewModel(
                     character: character

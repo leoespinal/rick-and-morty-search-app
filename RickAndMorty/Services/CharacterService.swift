@@ -12,7 +12,7 @@ protocol CharacterServiceable {
         status: CharacterStatusFilterOption,
         species: CharacterSpeciesFilterOption,
         type: CharacterTypeFilterOption
-    ) async throws -> [Character]
+    ) async throws -> [RickAndMortyCharacter]
 }
 
 public class CharacterService: CharacterServiceable {
@@ -40,7 +40,7 @@ public class CharacterService: CharacterServiceable {
         status: CharacterStatusFilterOption,
         species: CharacterSpeciesFilterOption,
         type: CharacterTypeFilterOption
-    ) async throws -> [Character] {
+    ) async throws -> [RickAndMortyCharacter] {
         let nameQueryItem = URLQueryItem(name: Constants.nameQueryParameterKey, value: name)
         var urlComponents = URLComponents(string: Constants.endpoint)
         urlComponents?.queryItems = [nameQueryItem]
