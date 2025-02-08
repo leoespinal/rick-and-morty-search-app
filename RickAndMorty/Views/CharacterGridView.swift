@@ -14,10 +14,14 @@ struct CharacterGridView: View {
         static let gridEdgeInsets = EdgeInsets(top: 16, leading: 16, bottom: 100, trailing: 16)
     }
     @ObservedObject var viewModel: CharacterSearchViewModel
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
+    var isLandscape: Bool {
+        horizontalSizeClass == .regular
+    }
     
     var body: some View {
         GeometryReader { geometry in
-            let isLandscape = geometry.size.width > geometry.size.height
             ScrollView {
                 LazyVGrid(columns: isLandscape ? [
                     GridItem(.flexible(maximum: geometry.size.width * Constants.landscapeModeGridItemScaleFactor), spacing: .zero, alignment: .top),
